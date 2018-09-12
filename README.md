@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/rdfjs/sink-map.svg?branch=master)](https://travis-ci.org/rdfjs/sink-map)
 
-[![npm version](https://img.shields.io/npm/v/@rdfjs/sink-map.svg)](https://www.npmjs.com/package/@rdfjs/sink-map)
+[![npm version](https://img.shields.io/npm/v/@rdfjs/sink-map.svg)](https://www.npmjs.com/package/@rdfjs/sink-map) [![Greenkeeper badge](https://badges.greenkeeper.io/rdfjs/sink-map.svg)](https://greenkeeper.io/)
 
 Map for [RDFJS Sinks](http://rdf.js.org/#sink-interface) including shortcut methods.
 
