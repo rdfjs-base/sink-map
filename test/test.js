@@ -5,10 +5,10 @@ const SinkMap = require('..')
 
 describe('sink-map', () => {
   describe('constructor', () => {
-    it('should create a empty map', () => {
+    it('should create an empty map', () => {
       const map = new SinkMap()
 
-      assert.deepStrictEqual(Object.keys(map).filter(key => map.hasOwnProperty(key)), [])
+      assert.strictEqual(map.size, 0)
     })
 
     it('should import the key/value pairs from a plain object', () => {
@@ -22,55 +22,23 @@ describe('sink-map', () => {
 
       const map = new SinkMap(other)
 
-      assert.strictEqual(map['application/ld+json'], jsonld)
-      assert.strictEqual(map['text/turtle'], turtle)
+      assert.strictEqual(map.get('application/ld+json'), jsonld)
+      assert.strictEqual(map.get('text/turtle'), turtle)
     })
 
     it('should import the key/value pairs from another SinkMap', () => {
       const jsonld = {}
       const turtle = {}
 
-      const other = new SinkMap()
-
-      other['application/ld+json'] = jsonld
-      other['text/turtle'] = turtle
-
-      const map = new SinkMap(other)
-
-      assert.strictEqual(map['application/ld+json'], jsonld)
-      assert.strictEqual(map['text/turtle'], turtle)
-    })
-  })
-
-  describe('.find', () => {
-    it('should be a method', () => {
-      const map = new SinkMap()
-
-      assert.strictEqual(typeof map.find, 'function')
-    })
-
-    it('should return undefined if no matching sink was found', () => {
-      const map = new SinkMap()
-
-      assert.strictEqual(map.find('image/jpeg'), undefined)
-    })
-
-    it('should return undefined if a class method name is given', () => {
-      const map = new SinkMap()
-
-      assert.strictEqual(map.find('find'), undefined)
-    })
-
-    it('should return the sink for the given key', () => {
-      const jsonld = {}
-      const turtle = {}
-
-      const map = new SinkMap({
+      const other = new SinkMap({
         'application/ld+json': jsonld,
         'text/turtle': turtle
       })
 
-      assert.strictEqual(map.find('text/turtle'), turtle)
+      const map = new SinkMap(other)
+
+      assert.strictEqual(map.get('application/ld+json'), jsonld)
+      assert.strictEqual(map.get('text/turtle'), turtle)
     })
   })
 
@@ -161,29 +129,6 @@ describe('sink-map', () => {
       })
 
       assert.strictEqual(map.import('text/turtle'), 'test')
-    })
-  })
-
-  describe('.list', () => {
-    it('should be a method', () => {
-      const map = new SinkMap()
-
-      assert.strictEqual(typeof map.list, 'function')
-    })
-
-    it('should return an array', () => {
-      const map = new SinkMap()
-
-      assert(Array.isArray(map.list()))
-    })
-
-    it('should return the keys of the sinks', () => {
-      const map = new SinkMap({
-        'application/ld+json': {},
-        'text/turtle': {}
-      })
-
-      assert.deepStrictEqual(map.list(), ['application/ld+json', 'text/turtle'])
     })
   })
 })
