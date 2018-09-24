@@ -8,7 +8,7 @@ Map for [RDFJS Sinks](http://rdf.js.org/#sink-interface) including shortcut meth
 
 ## Usage
 
-The package provides a JavaScript `Object` based map from a string key to a Sink.
+The package provides Map from a string key to a Sink with a shortcut for `.import`.
 Typical it's used to store parsers or serializers for specific media types.
 
 ### Create a SinkMap
@@ -20,22 +20,22 @@ const map = new SinkMap({
 })
 ```
 
-It's also possible to create an empty map and add or extend it later using the `[]` operator:
+It's also possible to create an empty map and add or extend it later using the `.set()` method:
 
 ```javascript
 const map = new SinkMap()
 
-map['text/turtle'] = new ParserN3()
+map.set('text/turtle') = new ParserN3()
 ```
 
 ### Find a Sink
 
-The `.find` method searches for the matching Sink and returns it:
+The `.get` method searches for the matching Sink and returns it:
 
 ```javascript
 const map = new SinkMap({...})
 
-const sink = map.find('text/turtle')
+const sink = map.get('text/turtle')
 
 if (sink) {
   // found
@@ -62,20 +62,6 @@ if (output) {
 } else {
   // not found
 }
-```
-
-### List keys
-
-The `.list` method returns all keys of the map in an array:
-
-```javascript
-const map = new SinkMap({
-  'text/turtle': new ParserN3()
-})
-
-const keys = map.list()
-
-console.log(keys[0]) // text/turtle
 ```
 
 ### Example
