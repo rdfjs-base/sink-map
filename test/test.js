@@ -11,14 +11,14 @@ describe('sink-map', () => {
       assert.strictEqual(map.size, 0)
     })
 
-    it('should import the key/value pairs from a plain object', () => {
+    it('should import the key/value pairs from an array', () => {
       const jsonld = {}
       const turtle = {}
 
-      const other = {
-        'application/ld+json': jsonld,
-        'text/turtle': turtle
-      }
+      const other = [
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ]
 
       const map = new SinkMap(other)
 
@@ -30,10 +30,10 @@ describe('sink-map', () => {
       const jsonld = {}
       const turtle = {}
 
-      const other = new SinkMap({
-        'application/ld+json': jsonld,
-        'text/turtle': turtle
-      })
+      const other = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
 
       const map = new SinkMap(other)
 
@@ -65,10 +65,10 @@ describe('sink-map', () => {
         }
       }
 
-      const map = new SinkMap({
-        'application/ld+json': jsonld,
-        'text/turtle': turtle
-      })
+      const map = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
 
       map.import('text/turtle')
 
@@ -85,10 +85,10 @@ describe('sink-map', () => {
         }
       }
 
-      const map = new SinkMap({
-        'application/ld+json': jsonld,
-        'text/turtle': turtle
-      })
+      const map = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
 
       map.import('text/turtle', 'test')
 
@@ -105,10 +105,10 @@ describe('sink-map', () => {
         }
       }
 
-      const map = new SinkMap({
-        'application/ld+json': jsonld,
-        'text/turtle': turtle
-      })
+      const map = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
 
       map.import('text/turtle', null, 'test')
 
@@ -123,10 +123,10 @@ describe('sink-map', () => {
         }
       }
 
-      const map = new SinkMap({
-        'application/ld+json': jsonld,
-        'text/turtle': turtle
-      })
+      const map = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
 
       assert.strictEqual(map.import('text/turtle'), 'test')
     })

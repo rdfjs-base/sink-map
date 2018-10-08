@@ -12,12 +12,12 @@ The package provides Map from a string key to a Sink with a shortcut for `.impor
 Typical it's used to store parsers or serializers for specific media types.
 
 ### Create a SinkMap
-The constructor accepts plain objects with key/sink pairs to fill the map:
+The constructor accepts arrays with key/sink pairs to fill the map:
 
 ```javascript
-const map = new SinkMap({
-  'text/turtle': new ParserN3()
-})
+const map = new SinkMap([
+  ['text/turtle', new ParserN3()]
+])
 ```
 
 It's also possible to create an empty map and add or extend it later using the `.set()` method:
@@ -33,7 +33,7 @@ map.set('text/turtle') = new ParserN3()
 The `.get` method searches for the matching Sink and returns it:
 
 ```javascript
-const map = new SinkMap({...})
+const map = new SinkMap([...])
 
 const sink = map.get('text/turtle')
 
@@ -52,7 +52,7 @@ It also has a `.import` method, but requires additionally the key as the first a
 It returns `null` if no matching sink was found:
 
 ```javascript
-const map = new SinkMap({...})
+const map = new SinkMap([...])
 
 const input = fs.createReadStream('..')
 const output = map.import('text/turtle', input)
@@ -73,9 +73,9 @@ const SinkMap = require('@rdfjs/sink-map')
 const ParserN3 = require('@rdfjs/parser-n3')
 const Readable = require('stream').Readable
 
-const map = new SinkMap({
-  'text/turtle': new ParserN3()
-})
+const map = new SinkMap([
+  ['text/turtle', new ParserN3()]
+])
 
 const input = new Readable({
   read: () => {
