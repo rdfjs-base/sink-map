@@ -10,6 +10,7 @@ Map for [RDFJS Sinks](http://rdf.js.org/#sink-interface) including shortcut meth
 
 The package provides Map from a string key to a Sink with a shortcut for `.import`.
 Typical it's used to store parsers or serializers for specific media types.
+As SinkMap extends from the [ECMAScript 2015 Map](https://www.ecma-international.org/ecma-262/6.0/#sec-map-objects) and doesn't overload any standard methods, methods like `set`, `get`, `has` or `delete` can be used as defined in the specification.
 
 ### Create a SinkMap
 The constructor accepts arrays with key/sink pairs to fill the map:
