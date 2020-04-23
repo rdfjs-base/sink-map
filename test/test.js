@@ -1,7 +1,8 @@
 /* global describe, it */
 
 const assert = require('assert')
-const SinkMap = require('..')
+const { SinkMap } = require('..')
+const { Readable } = require('readable-stream')
 
 describe('sink-map', () => {
   describe('constructor', () => {
@@ -95,7 +96,7 @@ describe('sink-map', () => {
       assert.strictEqual(actualInput, 'test')
     })
 
-    it('should forward the input parameter', () => {
+    it('should forward the options parameter', () => {
       let actualOptions
 
       const jsonld = {}
@@ -129,6 +130,127 @@ describe('sink-map', () => {
       ])
 
       assert.strictEqual(map.import('text/turtle'), 'test')
+    })
+  })
+
+  describe('lazy loaded', () => {
+    function createTestReadable() {
+      return new Readable({
+        read() {
+          this.push('test')
+          this.push(null)
+        }
+      })
+    }
+
+    it('should call the import method of the sink', () => {
+      let touched = false
+
+      const jsonld = async () => ({})
+      const turtle = async () => ({
+        import: () => {
+          touched = true
+          return createTestReadable()
+        }
+      })
+
+      const map = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
+
+      const stream = map.import('text/turtle')
+
+      return new Promise((resolve, reject) => {
+        stream.on('data', () => {})
+        stream.on('end', () => {
+          assert(touched)
+          resolve()
+        })
+        stream.on('error', reject)
+      })
+    })
+
+    it('should forward the input parameter', () => {
+      let actualInput
+
+      const jsonld = () => ({})
+      const turtle = () => ({
+        import: (input) => {
+          actualInput = input
+          return createTestReadable()
+        }
+      })
+
+      const map = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
+
+      const stream = map.import('text/turtle', 'test')
+
+      return new Promise((resolve, reject) => {
+        stream.on('data', () => {})
+        stream.on('end', () => {
+          assert.strictEqual(actualInput, 'test')
+          resolve()
+        })
+        stream.on('error', reject)
+      })
+    })
+
+    it('should forward the options parameter', () => {
+      let actualOptions
+
+      const jsonld = async () => ({})
+      const turtle = async () => ({
+        import: (input, options) => {
+          actualOptions = options
+          return createTestReadable()
+        }
+      })
+
+      const map = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
+
+      const stream = map.import('text/turtle', null, 'test')
+
+      return new Promise((resolve, reject) => {
+        stream.on('data', () => {})
+        stream.on('end', () => {
+          assert.strictEqual(actualOptions, 'test')
+          resolve()
+        })
+        stream.on('error', reject)
+      })
+    })
+
+    it('should pipe the parser stream', () => {
+      const jsonld = async () => ({})
+      const turtle = async () => ({
+        import: createTestReadable
+      })
+
+      const map = new SinkMap([
+        ['application/ld+json', jsonld],
+        ['text/turtle', turtle]
+      ])
+
+      const stream = map.import('text/turtle')
+
+      return new Promise((resolve, reject) => {
+        let data = ''
+        stream.on('data', chunk => {
+          data += chunk
+        })
+        stream.on('end', () => {
+          assert.strictEqual(data, 'test')
+          resolve()
+        })
+        stream.on('error', reject)
+      })
     })
   })
 })
