@@ -1,13 +1,27 @@
+import stream from 'readable-stream'
+
 class SinkMap extends Map {
   import (key, input, options) {
-    const parser = this.get(key)
+    const sink = this.get(key)
 
-    if (!parser) {
+    if (!sink) {
       return null
     }
 
-    return parser.import(input, options)
+    if (typeof sink === 'function') {
+      const passThrough = new stream.PassThrough()
+      Promise.resolve().then(async () => {
+        const sinkInstance = await sink()
+        this.set(key, sinkInstance)
+
+        sinkInstance.import(input, options).pipe(passThrough)
+      })
+
+      return passThrough
+    }
+
+    return sink.import(input, options)
   }
 }
 
-module.exports = SinkMap
+export { SinkMap }
