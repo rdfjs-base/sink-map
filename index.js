@@ -1,4 +1,4 @@
-import { PassThrough } from 'readable-stream'
+import stream from 'readable-stream'
 
 class SinkMap extends Map {
   import (key, input, options) {
@@ -8,8 +8,8 @@ class SinkMap extends Map {
       return null
     }
 
-    if (typeof parser === 'function') {
-      const passThrough = new PassThrough()
+    if (typeof sink === 'function') {
+      const passThrough = new stream.PassThrough()
       Promise.resolve().then(async () => {
         const sinkInstance = await sink()
         this.set(key, sinkInstance)

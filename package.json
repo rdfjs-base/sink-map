@@ -1,15 +1,16 @@
 {
-  "name": "@rdfjs/sink-map",
+  "name": "@rdf-esm/sink-map",
   "version": "1.0.1",
   "description": "Map for RDFJS Sinks including shortcut methods",
-  "main": "main.js",
-  "module": "index.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "standard && mocha"
+    "lint": "standard --fix",
+    "test": "mocha test/*.cjs"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/rdfjs-base/sink-map.git"
+    "url": "git://github.com/rdf-esm/sink-map.git"
   },
   "keywords": [
     "map",
@@ -17,14 +18,13 @@
     "rdfjs",
     "sink"
   ],
-  "author": "Thomas Bergwinkl <bergi@axolotlfarm.org> (https://www.bergnet.org/people/bergi/card#me)",
+  "author": "Tomasz Pluskiewicz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rdfjs-base/sink-map/issues"
+    "url": "https://github.com/rdf-esm/sink-map/issues"
   },
-  "homepage": "https://github.com/rdfjs-base/sink-map",
+  "homepage": "https://github.com/rdf-esm/sink-map",
   "dependencies": {
-    "esm": "^3.2.25",
     "readable-stream": "^3.6.0"
   },
   "devDependencies": {
@@ -32,6 +32,6 @@
     "standard": "^12.0.1"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=12"
   }
 }

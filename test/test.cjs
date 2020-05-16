@@ -1,10 +1,14 @@
-/* global describe, it */
-
 const assert = require('assert')
-const { SinkMap } = require('..')
+const { describe, it, before } = require('mocha')
 const { Readable } = require('readable-stream')
 
-describe('sink-map', () => {
+describe('sink-map', async () => {
+  let SinkMap
+
+  before(async () => {
+    SinkMap = (await import('../index.js')).SinkMap
+  })
+
   describe('constructor', () => {
     it('should create an empty map', () => {
       const map = new SinkMap()
@@ -134,9 +138,9 @@ describe('sink-map', () => {
   })
 
   describe('lazy loaded', () => {
-    function createTestReadable() {
+    function createTestReadable () {
       return new Readable({
-        read() {
+        read () {
           this.push('test')
           this.push(null)
         }
