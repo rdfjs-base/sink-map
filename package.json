@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/rdf-esm/sink-map",
   "dependencies": {
+    "@types/rdf-js": "^2.0.2",
     "readable-stream": "^3.6.0"
   },
   "devDependencies": {
