@@ -4,6 +4,8 @@
 
 Map for [RDFJS Sinks](http://rdf.js.org/#sink-interface) including shortcut methods.
 
+ES Modules fork of [@rdfjs/sink-map](https://npm.im/@rdfjs/sink-map)
+
 ## Usage
 
 The package provides Map from a string key to a Sink with a shortcut for `.import`.
