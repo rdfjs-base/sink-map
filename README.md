@@ -6,7 +6,11 @@
 
 Map for [RDFJS Sinks](http://rdf.js.org/#sink-interface) including shortcut methods.
 
-ES Modules fork of [@rdfjs/sink-map](https://npm.im/@rdfjs/sink-map)
+## Fork alert :exclamation:
+
+This package is an ES Modules fork of [@rdfjs/sink-map](https://npm.im/@rdfjs/sink-map)
+
+It also adds the ability to register lazy sinks, which are created on first request. For example to have the respecitve modules imported dynamically. Check the example below.
 
 ## Usage
 
@@ -29,6 +33,21 @@ It's also possible to create an empty map and add or extend it later using the `
 const map = new SinkMap()
 
 map.set('text/turtle') = new ParserN3()
+```
+
+### Add a lazy-loaded sink
+
+Sinks can also be added as an async function, for example to dynamically import the module.
+
+Here's an example from [@rdf-esm/formats-common](https://github.com/rdf-esm/formats-common/blob/master/parsers.js):
+
+```javascript
+const map = new SinkMap()
+
+map.set('text/turtle', async () => {
+  const ParserN3 = (await import('@rdfjs/parser-n3')).default
+  return new ParserN3()
+})
 ```
 
 ### Find a Sink
