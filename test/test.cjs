@@ -2,7 +2,7 @@ const assert = require('assert')
 const { describe, it, before } = require('mocha')
 const { Readable } = require('readable-stream')
 
-describe('sink-map', async () => {
+describe('sink-map', () => {
   let SinkMap
 
   before(async () => {

@@ -9,12 +9,18 @@ class SinkMap extends Map {
     }
 
     if (typeof sink === 'function') {
-      const passThrough = new stream.PassThrough()
+      const passThrough = new stream.PassThrough({ objectMode: true })
       Promise.resolve().then(async () => {
         const sinkInstance = await sink()
         this.set(key, sinkInstance)
 
-        sinkInstance.import(input, options).pipe(passThrough)
+        const origStream = sinkInstance.import(input, options)
+        origStream.on('error', err => {
+          passThrough.emit('error', err)
+          passThrough.emit('end')
+        })
+
+        origStream.pipe(passThrough)
       })
 
       return passThrough
