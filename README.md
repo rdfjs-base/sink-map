@@ -1,5 +1,7 @@
 # @rdf-esm/sink-map
 
+![](https://github.com/rdf-esm/sink-map/workflows/Test/badge.svg)
+
 [![npm version](https://img.shields.io/npm/v/@rdf-esm/sink-map.svg)](https://www.npmjs.com/package/@rdf-esm/sink-map)
 
 Map for [RDFJS Sinks](http://rdf.js.org/#sink-interface) including shortcut methods.
