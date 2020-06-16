@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.2](https://github.com/rdf-esm/sink-map/compare/v0.5.1...v0.5.2) (2020-06-16)
+
+
+### Bug Fixes
+
+* lazy sink should also allow promise ([c9a28eb](https://github.com/rdf-esm/sink-map/commit/c9a28eba4005ef01798137d745a8b4a60bfcecf3))
+
 ### [0.5.1](https://github.com/rdf-esm/sink-map/compare/v0.5.0...v0.5.1) (2020-06-12)
 
 ## 0.5.0 (2020-05-17)
