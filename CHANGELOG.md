@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.3](https://github.com/rdf-esm/sink-map/compare/v0.5.2...v0.5.3) (2020-10-09)
+
+
+### Bug Fixes
+
+* add CJS build as dual-package ([a0e9e37](https://github.com/rdf-esm/sink-map/commit/a0e9e37a2fc5fda224d20e543e6d40059e5bd3ec))
+
 ### [0.5.2](https://github.com/rdf-esm/sink-map/compare/v0.5.1...v0.5.2) (2020-06-16)
 
 
