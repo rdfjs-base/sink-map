@@ -4,10 +4,22 @@
   "description": "Map for RDFJS Sinks including shortcut methods",
   "main": "index.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    }
+  },
   "scripts": {
     "lint": "standard",
-    "test": "c8 --reporter=lcov mocha test/*.cjs"
+    "test": "c8 --reporter=lcov mocha test/*.cjs",
+    "prepack": "babel *.js --out-dir . --out-file-extension .cjs"
   },
+  "files": [
+    "*.js",
+    "*.cjs",
+    "*.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/rdf-esm/sink-map.git"
@@ -28,9 +40,13 @@
     "readable-stream": "^3.6.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
     "@rdfjs/parser-n3": "^1.1.4",
     "@rdfjs/serializer-ntriples": "^1.0.3",
     "@types/rdf-js": "^3.0.1",
+    "babel-plugin-add-import-extension": "^1.4.3",
     "mocha": "^5.2.0",
     "c8": "^7.1.2",
     "standard": "^12.0.1",
