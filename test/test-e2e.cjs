@@ -54,4 +54,22 @@ describe('sink-map', () => {
     })
     assert(errorCaught)
   })
+
+  it('forwards prefix events', (done) => {
+    // given
+    let errorCaught = false
+    const input = '@prefix ex: <http://example.com/> . ex:foo ex:bar ex:baz .'
+    const parsers = new SinkMap()
+    parsers.set('text/turtle', () => new Parser())
+
+    // when
+    const importStream = parsers.import('text/turtle', stringToStream(input))
+
+    // then
+    importStream.on('prefix', (prefix, ns) => {
+      assert.strictEqual(prefix, 'ex')
+      assert.strictEqual(ns.value, 'http://example.com/')
+      done()
+    })
+  })
 })

@@ -15,6 +15,9 @@ class SinkMap extends Map {
         this.set(key, sinkInstance)
 
         const origStream = sinkInstance.import(input, options)
+        origStream.on('prefix', (prefix, ns) => {
+          passThrough.emit('prefix', prefix, ns)
+        })
         origStream.on('error', err => {
           passThrough.emit('error', err)
           passThrough.emit('end')
