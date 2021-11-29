@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.5](https://github.com/rdf-esm/sink-map/compare/v0.5.4...v0.5.5) (2021-11-29)
+
+
+### Bug Fixes
+
+* prefix events were not being forwarded ([f9571eb](https://github.com/rdf-esm/sink-map/commit/f9571eb7ed6a4bc1fd7020d68e7cb2cf3322ee62))
+
 ### [0.5.4](https://github.com/rdf-esm/sink-map/compare/v0.5.3...v0.5.4) (2020-10-09)
 
 ### [0.5.3](https://github.com/rdf-esm/sink-map/compare/v0.5.2...v0.5.3) (2020-10-09)
