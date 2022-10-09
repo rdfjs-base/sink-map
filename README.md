@@ -1,10 +1,8 @@
 # @rdfjs/sink-map
-
-[![Build Status](https://travis-ci.org/rdfjs/sink-map.svg?branch=master)](https://travis-ci.org/rdfjs/sink-map)
-
+[![build status](https://img.shields.io/github/workflow/status/rdfjs-base/sink-map/Test)](https://github.com/rdfjs-base/sink-map/actions/workflows/test.yaml)
 [![npm version](https://img.shields.io/npm/v/@rdfjs/sink-map.svg)](https://www.npmjs.com/package/@rdfjs/sink-map)
 
-Map for [RDFJS Sinks](http://rdf.js.org/#sink-interface) including shortcut methods.
+Map for [RDF/JS Sink](http://rdf.js.org/#sink-interface) including shortcut methods.
 
 ## Usage
 
@@ -70,9 +68,9 @@ if (output) {
 Here is a complete example where the map is used to store parsers and the `.import` shortcut is used to parse a string input:
 
 ```javascript
-const SinkMap = require('@rdfjs/sink-map')
-const ParserN3 = require('@rdfjs/parser-n3')
-const Readable = require('stream').Readable
+import SinkMap from '@rdfjs/sink-map'
+import ParserN3 from '@rdfjs/parser-n3'
+import { Readable } from 'readable-stream'
 
 const map = new SinkMap([
   ['text/turtle', new ParserN3()]

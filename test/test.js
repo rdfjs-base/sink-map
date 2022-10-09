@@ -1,14 +1,13 @@
-/* global describe, it */
-
-const assert = require('assert')
-const SinkMap = require('..')
+import { strictEqual } from 'assert'
+import { describe, it } from 'mocha'
+import SinkMap from '../index.js'
 
 describe('sink-map', () => {
   describe('constructor', () => {
     it('should create an empty map', () => {
       const map = new SinkMap()
 
-      assert.strictEqual(map.size, 0)
+      strictEqual(map.size, 0)
     })
 
     it('should import the key/value pairs from an array', () => {
@@ -22,8 +21,8 @@ describe('sink-map', () => {
 
       const map = new SinkMap(other)
 
-      assert.strictEqual(map.get('application/ld+json'), jsonld)
-      assert.strictEqual(map.get('text/turtle'), turtle)
+      strictEqual(map.get('application/ld+json'), jsonld)
+      strictEqual(map.get('text/turtle'), turtle)
     })
 
     it('should import the key/value pairs from another SinkMap', () => {
@@ -37,8 +36,8 @@ describe('sink-map', () => {
 
       const map = new SinkMap(other)
 
-      assert.strictEqual(map.get('application/ld+json'), jsonld)
-      assert.strictEqual(map.get('text/turtle'), turtle)
+      strictEqual(map.get('application/ld+json'), jsonld)
+      strictEqual(map.get('text/turtle'), turtle)
     })
   })
 
@@ -46,13 +45,13 @@ describe('sink-map', () => {
     it('should be a method', () => {
       const map = new SinkMap()
 
-      assert.strictEqual(typeof map.import, 'function')
+      strictEqual(typeof map.import, 'function')
     })
 
     it('should return null if no matching sink was found', () => {
       const map = new SinkMap()
 
-      assert.strictEqual(map.import('image/jpeg'), null)
+      strictEqual(map.import('image/jpeg'), null)
     })
 
     it('should call the import method of the sink', () => {
@@ -72,7 +71,7 @@ describe('sink-map', () => {
 
       map.import('text/turtle')
 
-      assert(touched)
+      strictEqual(touched, true)
     })
 
     it('should forward the input parameter', () => {
@@ -80,7 +79,7 @@ describe('sink-map', () => {
 
       const jsonld = {}
       const turtle = {
-        import: (input) => {
+        import: input => {
           actualInput = input
         }
       }
@@ -92,7 +91,7 @@ describe('sink-map', () => {
 
       map.import('text/turtle', 'test')
 
-      assert.strictEqual(actualInput, 'test')
+      strictEqual(actualInput, 'test')
     })
 
     it('should forward the input parameter', () => {
@@ -112,7 +111,7 @@ describe('sink-map', () => {
 
       map.import('text/turtle', null, 'test')
 
-      assert.strictEqual(actualOptions, 'test')
+      strictEqual(actualOptions, 'test')
     })
 
     it('should return the result of the sink import method call', () => {
@@ -128,7 +127,7 @@ describe('sink-map', () => {
         ['text/turtle', turtle]
       ])
 
-      assert.strictEqual(map.import('text/turtle'), 'test')
+      strictEqual(map.import('text/turtle'), 'test')
     })
   })
 })
