@@ -10,4 +10,4 @@ class SinkMap extends Map {
   }
 }
 
-module.exports = SinkMap
+export default SinkMap
