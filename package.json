@@ -1,7 +1,7 @@
 {
-  "name": "@rdf-esm/sink-map",
-  "version": "0.5.5",
-  "description": "Map for RDFJS Sinks including shortcut methods",
+  "name": "@rdfjs/sink-map",
+  "version": "2.0.0",
+  "description": "Map for RDF/JS Sinks including shortcut methods",
   "main": "index.js",
   "type": "module",
   "exports": {
@@ -11,18 +11,13 @@
     }
   },
   "scripts": {
-    "lint": "standard",
-    "test": "c8 --reporter=lcov mocha test/*.cjs",
-    "prepack": "babel *.js --out-dir . --out-file-extension .cjs"
+    "lint": "stricter-standard",
+    "prestart": "npm run lint",
+    "test": "c8 --reporter=lcov --reporter=text mocha"
   },
-  "files": [
-    "*.js",
-    "*.cjs",
-    "*.d.ts"
-  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/rdf-esm/sink-map.git"
+    "url": "git://github.com/rdfjs-base/sink-map.git"
   },
   "keywords": [
     "map",
@@ -33,29 +28,19 @@
   "author": "Thomas Bergwinkl <bergi@axolotlfarm.org> (https://www.bergnet.org/people/bergi/card#me)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rdf-esm/sink-map/issues"
+    "url": "https://github.com/rdfjs-base/sink-map/issues"
   },
-  "homepage": "https://github.com/rdf-esm/sink-map",
+  "homepage": "https://github.com/rdfjs-base/sink-map",
   "dependencies": {
     "readable-stream": "^3.6.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
     "@rdfjs/parser-n3": "^1.1.4",
     "@rdfjs/serializer-ntriples": "^1.0.3",
-    "@types/rdf-js": "^3.0.1",
-    "babel-plugin-add-import-extension": "^1.4.3",
-    "mocha": "^5.2.0",
-    "c8": "^7.1.2",
-    "standard": "^12.0.1",
+    "assert": "^2.0.0",
+    "c8": "^7.12.0",
+    "mocha": "^10.0.0",
+    "stricter-standard": "^0.2.0",
     "string-to-stream": "^3.0.1"
-  },
-  "engines": {
-    "node": ">=12"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

@@ -1,16 +1,8 @@
-# @rdf-esm/sink-map
+# @rdfjs/sink-map
+[![build status](https://img.shields.io/github/workflow/status/rdfjs-base/sink-map/Test)](https://github.com/rdfjs-base/sink-map/actions/workflows/test.yaml)
+[![npm version](https://img.shields.io/npm/v/@rdfjs/sink-map.svg)](https://www.npmjs.com/package/@rdfjs/sink-map)
 
-![](https://github.com/rdf-esm/sink-map/workflows/Test/badge.svg)
-
-[![npm version](https://img.shields.io/npm/v/@rdf-esm/sink-map.svg)](https://www.npmjs.com/package/@rdf-esm/sink-map)
-
-Map for [RDFJS Sinks](http://rdf.js.org/#sink-interface) including shortcut methods.
-
-## Fork alert :exclamation:
-
-This package is an ES Modules fork of [@rdfjs/sink-map](https://npm.im/@rdfjs/sink-map)
-
-It also adds the ability to register lazy sinks, which are created on first request. For example to have the respecitve modules imported dynamically. Check the example below.
+Map for [RDF/JS Sink](http://rdf.js.org/#sink-interface) including shortcut methods.
 
 ## Usage
 
@@ -91,15 +83,15 @@ if (output) {
 Here is a complete example where the map is used to store parsers and the `.import` shortcut is used to parse a string input:
 
 ```javascript
-import { SinkMap } from '@rdfjs/sink-map'
+import SinkMap from '@rdfjs/sink-map'
 import ParserN3 from '@rdfjs/parser-n3'
-import stream from 'stream'
+import { Readable } from 'readable-stream'
 
 const map = new SinkMap([
   ['text/turtle', new ParserN3()]
 ])
 
-const input = new stream.Readable({
+const input = new Readable({
   read: () => {
     input.push(`
       PREFIX s: <http://schema.org/>

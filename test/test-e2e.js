@@ -1,16 +1,11 @@
-const assert = require('assert')
-const { describe, it, before } = require('mocha')
-const stringToStream = require('string-to-stream')
-const Parser = require('@rdfjs/parser-n3')
-const Serializer = require('@rdfjs/serializer-ntriples')
+import assert from 'assert'
+import Parser from '@rdfjs/parser-n3'
+import Serializer from '@rdfjs/serializer-ntriples'
+import { describe, it } from 'mocha'
+import stringToStream from 'string-to-stream'
+import SinkMap from '../index.js'
 
 describe('sink-map', () => {
-  let SinkMap
-
-  before(async () => {
-    SinkMap = (await import('../index.js')).SinkMap
-  })
-
   it('successfully round-trips dataset with lazy sinks', async () => {
     // given
     const input = '<http://example.com/foo> <http://example.com/bar> <http://example.com/baz> .\n'
@@ -26,7 +21,9 @@ describe('sink-map', () => {
 
     // then
     await new Promise((resolve, reject) => {
-      outputStream.on('data', chunk => output += chunk)
+      outputStream.on('data', chunk => {
+        output += chunk
+      })
       outputStream.on('end', resolve)
       outputStream.on('error', reject)
     })
@@ -55,9 +52,8 @@ describe('sink-map', () => {
     assert(errorCaught)
   })
 
-  it('forwards prefix events', (done) => {
+  it('forwards prefix events', done => {
     // given
-    let errorCaught = false
     const input = '@prefix ex: <http://example.com/> . ex:foo ex:bar ex:baz .'
     const parsers = new SinkMap()
     parsers.set('text/turtle', () => new Parser())
