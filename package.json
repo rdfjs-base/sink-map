@@ -2,14 +2,8 @@
   "name": "@rdfjs/sink-map",
   "version": "2.0.0",
   "description": "Map for RDF/JS Sinks including shortcut methods",
-  "main": "index.js",
   "type": "module",
-  "exports": {
-    ".": {
-      "import": "./index.js",
-      "require": "./index.cjs"
-    }
-  },
+  "main": "index.js",
   "scripts": {
     "lint": "stricter-standard",
     "prestart": "npm run lint",
