@@ -1,6 +1,6 @@
 {
   "name": "@rdfjs/sink-map",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Map for RDF/JS Sinks including shortcut methods",
   "type": "module",
   "main": "index.js",
