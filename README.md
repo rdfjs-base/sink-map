@@ -1,8 +1,9 @@
 # @rdfjs/sink-map
-[![build status](https://img.shields.io/github/workflow/status/rdfjs-base/sink-map/Test)](https://github.com/rdfjs-base/sink-map/actions/workflows/test.yaml)
+
+[![build status](https://img.shields.io/github/actions/workflow/status/rdfjs-base/sink-map/test.yaml?branch=master)](https://github.com/rdfjs-base/sink-map/actions/workflows/test.yaml)
 [![npm version](https://img.shields.io/npm/v/@rdfjs/sink-map.svg)](https://www.npmjs.com/package/@rdfjs/sink-map)
 
-Map for [RDF/JS Sink](http://rdf.js.org/#sink-interface) including shortcut methods.
+Map for [RDF/JS Sink](http://rdf.js.org/stream-spec/#sink-interface) including shortcut methods.
 
 ## Usage
 
